@@ -20,7 +20,7 @@ function initMap() {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     };
-                    map.zoom = 10;
+                    map.zoom = 13   ;
                     map.setCenter(pos);
                 },
                 () => {
@@ -37,8 +37,8 @@ function initMap() {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
             browserHasGeolocation
-                ? "Error: Falha em usar a geolocalização."
-                : "Error: Por favor, atualize ou troque seu navegador para usar a geolocalização"
+                ? "Erro: Falha em usar a geolocalização."
+                : "Erro: Por favor, atualize ou troque seu navegador para usar a geolocalização"
         );
         infoWindow.open(map);
     }
@@ -111,10 +111,10 @@ function initMap() {
         map: map,
         radius: 20,
         gradient: [
-            "rgba(0,0,0,0.5)",
-            "rgb(0,0,255)",
-            "rgb(255,98,0)",
-            "rgb(255,255,0)",
+            "rgba(255,255,255,0)",
+            "#ff0000",
+            "#0000ff",
+            "#00ff00",
         ],
     });
 
@@ -129,18 +129,18 @@ function initMap() {
     const card = document.getElementById("pac-card");
     const input = document.getElementById("pac-input");
     const options = {
-        fields: ["formatted_address", "geometry", "name"],
+        componentRestrictions: { country: "br" },
+        fields: ["address_components", "geometry", "name"],
         strictBounds: false,
-        types: ["establishment"],
+        types: ["sublocality"],
     };
 
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(locationButton);
 
-    const autocomplete = new google.maps.places.Autocomplete(input);
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
 
     autocomplete.bindTo("bounds", map);
-    autocomplete.setTypes(["(cities)"]);
 
     const marker = new google.maps.Marker({
         map,
