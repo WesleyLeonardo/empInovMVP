@@ -177,14 +177,12 @@ function initMap() {
 //lembrete: Localização: " + place.geometry.location + "")
 //Contém latitude e longitude
 
-
-
 window.initMap = initMap;
 
 
 //Banco de Dados
-const postgres = require("postgres");
-require("dotenv").config();
+const postgres = require('pg');
+require('dotenv').config();
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${ENDPOINT_ID}`;
@@ -196,5 +194,5 @@ async function getPgVersion() {
     console.log(result);
 }
 
-console.log("Hello World!");
+getPgVersion();
 //npm run dev
