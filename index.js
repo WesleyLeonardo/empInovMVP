@@ -6,6 +6,7 @@ function initMap() {
         mapTypeControl: true,
     });
 
+
     map.mapTypeControl = false;
 
     const locationButton = document.createElement("button");
