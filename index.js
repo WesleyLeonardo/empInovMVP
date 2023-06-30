@@ -38,7 +38,7 @@ function initMap() {
         infoWindow.setContent(
             browserHasGeolocation
                 ? "Erro: Falha em usar a geolocalização."
-                : "Erro: Por favor, atualize ou troque seu navegador para usar a geolocalização"
+                : "Erro: Por favor, atualize ou troque seu navegador para se localizar."
         );
         infoWindow.open(map);
     }
@@ -144,7 +144,7 @@ function initMap() {
 
     const marker = new google.maps.Marker({
         map,
-        anchorPoint: new google.maps.Point(0, -29),
+        anchorPoint: new google.maps.Point(0, 0),
     });
 
     autocomplete.addListener("place_changed", () => {
@@ -172,7 +172,29 @@ function initMap() {
         infowindow.open(map, marker);
     });
 
-
 }
 
-window.initMap = initMap;   
+//lembrete: Localização: " + place.geometry.location + "")
+//Contém latitude e longitude
+
+
+
+window.initMap = initMap;
+
+
+//Banco de Dados
+const postgres = require("postgres");
+require("dotenv").config();
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${ENDPOINT_ID}`;
+
+const sql = postgres(URL, { ssl: 'require' });
+
+async function getPgVersion() {
+    const result = await sql`select version()`;
+    console.log(result);
+}
+
+console.log("Hello World!");
+//npm run dev
