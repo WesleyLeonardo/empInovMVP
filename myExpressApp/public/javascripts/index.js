@@ -89,7 +89,7 @@ function initMap() {
         opacity: 0.8,
         dissipating: true,
         maxIntensity: 100,
-        radius: 50,
+        radius: 70,
     });
 
     //Card de pesquisa de cidades
