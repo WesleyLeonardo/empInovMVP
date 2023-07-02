@@ -45,29 +45,39 @@ function initMap() {
     }
 
 
+    var media = function(){
+        var seguranca = Math.ceil(Math.random() * 5 * 10) / 10;
+        var limpeza = Math.ceil(Math.random() * 5 * 10) / 10;
+        var iluminacao = Math.ceil(Math.random() * 5 * 10) / 10;;
+        var asfalto = Math.ceil(Math.random() * 5 * 10) / 10;;
+        var crianca = Math.ceil(Math.random() * 5 * 10) / 10;;
+        var estetica = Math.ceil(Math.random() * 5 * 10) / 10;;
+        var mediaarred = Math.ceil((seguranca + limpeza + iluminacao + asfalto + crianca + estetica) / 6 * 10) / 10;
+        return mediaarred;
+    }
 
     //Dados do Heatmap
     var heatmapData = [
 //Centro
-        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: 80},
+        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: media()},
 //Tiradentes
-        {location: new google.maps.LatLng(-20.4804084, -54.5711203), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4804084, -54.5711203), weight: media()},
 //Vila Vilas Boas
-        {location: new google.maps.LatLng(-20.4874507, -54.59030560000001), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4874507, -54.59030560000001), weight: media()},
 //Pioneiros
-        {location: new google.maps.LatLng(-20.5111925, -54.614979), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.5111925, -54.614979), weight: media()},
 //Aero Rancho
-        {location: new google.maps.LatLng(-20.51886, -54.6478885), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.51886, -54.6478885), weight: media()},
 //Jardim São Conrado
-        {location: new google.maps.LatLng(-20.4965941, -54.6792266), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4965941, -54.6792266), weight: media()},
 //Vila Taveiropolis
-        {location: new google.maps.LatLng(-20.4750862, -54.6808111), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4750862, -54.6808111), weight: media()},
 //Santa Fe
-        {location: new google.maps.LatLng(-20.4527743, -54.5900068), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4527743, -54.5900068), weight: media()},
 //Coronel Antonino
-        {location: new google.maps.LatLng(-20.4206427, -54.59030560000001), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4206427, -54.59030560000001), weight: media()},
 //São Francisco
-        {location: new google.maps.LatLng(-20.4462987, -54.61223709999999), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4462987, -54.61223709999999), weight: media()},
     ];
 
     console.log(heatmapData);
@@ -88,7 +98,7 @@ function initMap() {
     heatmap.setOptions({
         opacity: 0.8,
         dissipating: true,
-        maxIntensity: 100,
+        maxIntensity: 5,
         radius: 70,
     });
 
@@ -114,8 +124,11 @@ function initMap() {
         anchorPoint: new google.maps.Point(0, 0),
     });
 
+
     autocomplete.addListener("place_changed", () => {
+
         marker.setVisible(true);
+
 
         const place = autocomplete.getPlace();
 
@@ -127,18 +140,23 @@ function initMap() {
         if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
 
-            var text = "Bairro: Centro - Campo Grande\n" +
-                "Média: 4\n" +
-                "Segurança: 4\n" +
-                "Limpeza: 3\n" +
-                "Iluminação: 5\n" +
-                "Asfalto: 5\n" +
-                "Adequado para crianças: 3\n" +
-                "Estética: 4\n";
+            var mediatext = function () {
+                var seguranca = Math.ceil(Math.random() * 5 * 10) / 10;
+                var limpeza = Math.ceil(Math.random() * 5 * 10) / 10;
+                var iluminacao = Math.ceil(Math.random() * 5 * 10) / 10;
+                var asfalto = Math.ceil(Math.random() * 5 * 10) / 10;
+                var crianca = Math.ceil(Math.random() * 5 * 10) / 10;
+                var estetica = Math.ceil(Math.random() * 5 * 10) / 10;
+                var mediaarred = Math.ceil((seguranca + limpeza + iluminacao + asfalto + crianca + estetica) / 6 * 10) / 10;
+                //retorna texto com a média e todas as notas
+                return "Média: " + mediaarred + "\nSegurança: " + seguranca + "\nLimpeza: " + limpeza + "\nIluminação: " + iluminacao + "\nAsfalto: " + asfalto + "\nCriança: " + crianca + "\nEstética: " + estetica;
+            }
 
-            alert(text);
+            alert("Bairro: " + place.name + "\n" + mediatext());
 
-        } else {
+
+        }
+        else {
             map.setCenter(place.geometry.location);
             map.setZoom(10);
         }
@@ -149,7 +167,9 @@ function initMap() {
         infowindowContent.children["place-address"].textContent =
             place.formatted_address;
         infowindow.open(map, marker);
+
     });
+
 
 }
 
