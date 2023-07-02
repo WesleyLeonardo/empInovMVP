@@ -49,7 +49,7 @@ function initMap() {
     //Dados do Heatmap
     var heatmapData = [
 //Centro
-        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: Math.random()*100},
+        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: 40},
 //Tiradentes
         {location: new google.maps.LatLng(-20.4804084, -54.5711203), weight: Math.random()*100},
 //Vila Vilas Boas
@@ -126,26 +126,27 @@ function initMap() {
 
         if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
-            //salva a latitude e longitude e o nome do bairro em um array e salva em um arquivo json
-            var lat = place.geometry.location.lat();
-            var lng = place.geometry.location.lng();
-            var name = place.name;
 
-            /*mostra uma caixa de texto as informações no formato:
-            "//nome do bairro"
-            {location: new google.maps.LatLng(lat, lng), weight: Math.random()*100},
+            /*alerta com o seguinte conteúdo:
+            Bairro: NOME DO BAIRRO - CIDADE
+            Média: 4
+            Segurança: 4
+            Limpeza: 3
+            Iluminação: 5
+            Asfalto: 5
+            Adequado para crianças: 3
+            Estética: 4
              */
-            var text = "//" + name + "\n" + "{location: new google.maps.LatLng(" + lat + ", " + lng + "), weight: Math.random()*100},";
-            //copia o texto para a área de transferência
-            navigator.clipboard.writeText(text);
 
-
-
-
-
-
-
-
+            var text = "Bairro: " + place.name + " - Campo Grande\n" +
+                "Média: 4\n" +
+                "Segurança: 4\n" +
+                "Limpeza: 3\n" +
+                "Iluminação: 5\n" +
+                "Asfalto: 5\n" +
+                "Adequado para crianças: 3\n" +
+                "Estética: 4\n";
+            alert(text);
 
         } else {
             map.setCenter(place.geometry.location);
