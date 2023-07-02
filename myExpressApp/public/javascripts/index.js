@@ -127,18 +127,7 @@ function initMap() {
         if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
 
-            /*alerta com o seguinte conteúdo:
-            Bairro: NOME DO BAIRRO - CIDADE
-            Média: 4
-            Segurança: 4
-            Limpeza: 3
-            Iluminação: 5
-            Asfalto: 5
-            Adequado para crianças: 3
-            Estética: 4
-             */
-
-            var text = "Bairro: " + place.name + " - Campo Grande\n" +
+            var text = "Bairro: Centro - Campo Grande\n" +
                 "Média: 4\n" +
                 "Segurança: 4\n" +
                 "Limpeza: 3\n" +
@@ -146,6 +135,7 @@ function initMap() {
                 "Asfalto: 5\n" +
                 "Adequado para crianças: 3\n" +
                 "Estética: 4\n";
+
             alert(text);
 
         } else {
