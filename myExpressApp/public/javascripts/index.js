@@ -49,7 +49,7 @@ function initMap() {
     //Dados do Heatmap
     var heatmapData = [
 //Centro
-        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: 40},
+        {location: new google.maps.LatLng(-20.4617189, -54.61223709999999), weight: 80},
 //Tiradentes
         {location: new google.maps.LatLng(-20.4804084, -54.5711203), weight: Math.random()*100},
 //Vila Vilas Boas
